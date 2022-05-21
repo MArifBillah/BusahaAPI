@@ -78,67 +78,41 @@ app.route('/test')
         res.json(results);
       }
     );
-  });
-//get one question from 'questions' table according to id
-// app.route('/test/:questId/')
-//   .get(function(req, res, next) {
-//     connection.query(
-//       'select * from questions where id = ?', req.params.questId,
-//       function(error, results, fields) {
-//         if (error) throw error;
-//         res.json(results);
-//       }
-//     );
-//   });
-
-// test drive
-  // app.route('/test/:questId/:answerId')
-  //   .get(function(req, res, next) {
-  //     connection.query(
-  //       'SELECT * FROM questions, answer WHERE id = ? AND question_id = ?', req.params.questId, req.params.answerId,
-  //       function(error, results, fields) {
-  //         if (error) throw error;
-  //         res.json(results);
-  //       }
-  //     );
-  //   });
-    app.get("/test", async(req, res) =>{
-      // const data = {
-      //     questId: req.params.questId,
-      //     answerId: req.params.answerId
-      // }
-      connection.query("SELECT * FROM questions", function(error, patrol_result) {
-        if (error) {
-          return console.log('error: ' + error.message);
-        }else{
-          connection.query("SELECT * FROM answer", function(error, user_result) {
-            if (error) {
-              return console.log('error: ' + error.message);
-            }
-            res.render('patrol_schedule', {
-              patrol: patrol_result,
-              user: user_result
-            });
-          });
-
-        }
-
-      });
-  });
-
-  //get answers according to question id
-  app.route('/test/answer/:questId')
+});
+//Count all the questions in 'questions table'
+app.route('/count')
   .get(function(req, res, next) {
     connection.query(
-      'select * from answer where question_id = ?', req.params.questId,
+      'SELECT count(*) FROM questions',
       function(error, results, fields) {
         if (error) throw error;
         res.json(results);
       }
     );
   });
+  //Get specific question and answer according to the question ID
+  app.route('/test/:questionId')
+  .get(function(req, res, next) {
+    const data = req.params.questionId;
 
-
+    const sql = "SELECT * FROM questions WHERE id = ?";
+    connection.query(sql, data, function(err, question) {
+      if (err) {
+        return console.log('error: ' + err.message);
+      }
+      const sql = "SELECT * FROM answer WHERE question_id = ?";
+      connection.query(sql, data, function(err, answer) {
+        if (err) {
+          return console.log('error: ' + err.message);
+        }
+        //send the freakin thing out
+        res.json({
+          Question: question,
+          Answer: answer
+        });
+      });
+    });
+  });
 
 //get a specific venture
 app.route('/usaha/:usahaId')
@@ -154,6 +128,7 @@ app.route('/usaha/:usahaId')
 
 
   //post hasil test ke history
+  //in construction
   app.post("/history", async(req, res) =>{
     var dt = dateTime.create();
     var formatted = dt.format('Y-m-d H:M:S');
@@ -184,22 +159,9 @@ app.route('/test/history/:userId')
         res.json(results);
       }
     );
-  });
+});
 
-//hapus history test user
-
-// app.route('/test/history/delete/:historyid')
-//   .delete(function(req, res, next) {
-//     connection.query(
-//       'delete from history where id = ?', req.params.historyid,
-//       function(error, results, fields) {
-//         if (error) throw error;
-//         res.json(results);
-//       }
-//     );
-//   });
-
-  app.delete("/test/history/delete", async(req, res) =>{
+app.delete("/test/history/delete", async(req, res) =>{
     const data = {
         id: req.body.id
     }
