@@ -1,6 +1,6 @@
 # BusahaAPI
 
-sign up -> POST\
+# **sign up** -> POST\
 endpoint : http://localhost:3000/signup\
 
 response sample:\
@@ -14,9 +14,9 @@ response sample:\
         "gender": "P",\
         "status": "mahasiswa"\
     }\
-}\
+}
 
-log in -> POST\
+# **log in** -> POST\
 endpoint : https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf5XUb2UPJvQu6nzPKDgR-GpUG49v-vVY\
 
 response sample:\
