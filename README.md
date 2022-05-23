@@ -2,6 +2,7 @@
 
 # **sign up** -> POST
 endpoint : http://localhost:3000/signup
+
 request sample:\
 {\
     "username" : "Billah",\
@@ -24,6 +25,7 @@ response sample:\
 
 # **log in** -> POST
 endpoint : https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf5XUb2UPJvQu6nzPKDgR-GpUG49v-vVY
+
 request sample:\
 {\
     "email":"hellso@gmail.com",\
