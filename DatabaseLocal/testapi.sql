@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2022 at 05:04 PM
+-- Generation Time: May 23, 2022 at 04:11 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -42,7 +42,8 @@ INSERT INTO `answer` (`answer_id`, `question_id`, `answer`, `indexes`) VALUES
 (1, 1, 'pilihan A', 1),
 (2, 1, 'pilihan b', 2),
 (3, 2, 'pilihan a', 3),
-(4, 2, 'pilihan c', 4);
+(4, 2, 'pilihan c', 4),
+(5, 1, 'wsedgfvszcx', 4);
 
 -- --------------------------------------------------------
 
@@ -111,6 +112,29 @@ INSERT INTO `result` (`id`, `usaha`, `deskripsi`, `jenis_usaha`, `kategori`, `mo
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `saved`
+--
+
+CREATE TABLE `saved` (
+  `id` int(11) NOT NULL,
+  `id_user` varchar(255) NOT NULL,
+  `id_question` int(11) NOT NULL,
+  `id_answer` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `saved`
+--
+
+INSERT INTO `saved` (`id`, `id_user`, `id_question`, `id_answer`) VALUES
+(1, 'YVYhCfePCZQqSwrIvWNogH0wMfF2', 2, 5),
+(2, 'yIdvAPxWTlSrs2zot2UcPGMz0p12', 1, 2),
+(20, 'YVYhCfePCZQqSwrIvWNogH0wMfF2', 3, 5),
+(21, 'YVYhCfePCZQqSwrIvWNogH0wMfF2', 1, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -131,7 +155,9 @@ INSERT INTO `user` (`id`, `username`, `email`, `dob`, `gender`, `status`) VALUES
 ('0', 'arif', 'asarsif@gmail.com', '2001-01-28', '', ''),
 ('22222222222222', 'arif', 'asarsif@gmail.com', '2001-01-28', '', ''),
 ('j6wJlUrJm1ZJsDlDGOIjJUrEGTa2', 'Arif Billah', 'emailcontoh9aja@mail.com', '2001-09-09', 'P', 'mahasiswa'),
+('KujxeSbItfUZRcjN23KJ0YQWwX02', 'Arif Billah', 'emailcontoh11aja@mail.com', '2001-09-09', 'P', 'mahasiswa'),
 ('O96JYWClLzTZFMOGZmSlbH6dNwQ2', 'arif', 'emailcontoh5aja@mail.com', '2001-09-09', '', ''),
+('orCFGgSUkwZn9K1FNYRwpzrTK2T2', 'Arif Billah', 'emailcontoh10aja@mail.com', '2001-09-09', 'P', 'mahasiswa'),
 ('tczMUEEDp8g1KjEynrYg6iLUWE13', 'arif', 'emailcontoh6aja@mail.com', '2001-09-09', '', ''),
 ('tfp4BVRSEvfui3D4HxJTL1Ei3JU2', 'arif', 'emailcontohaja@mail.com', '2001-09-09', '', ''),
 ('userIDdarifirebase', 'arif', 'asarsif@gmail.com', '2001-01-28', '', ''),
@@ -169,6 +195,12 @@ ALTER TABLE `result`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `saved`
+--
+ALTER TABLE `saved`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -182,7 +214,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `history`
@@ -201,6 +233,12 @@ ALTER TABLE `questions`
 --
 ALTER TABLE `result`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `saved`
+--
+ALTER TABLE `saved`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -68,17 +68,6 @@ app.route('/user/:userId')
     );
   });
 
-//get all questions in the database 
-app.route('/test')
-  .get(function(req, res, next) {
-    connection.query(
-      'SELECT * FROM questions',
-      function(error, results, fields) {
-        if (error) throw error;
-        res.json(results);
-      }
-    );
-});
 //Count all the questions in 'questions table'
 app.route('/count')
   .get(function(req, res, next) {
@@ -90,6 +79,19 @@ app.route('/count')
       }
     );
   });
+
+//get all questions in the database 
+app.route('/test')
+  .get(function(req, res, next) {
+    connection.query(
+      'SELECT * FROM questions',
+      function(error, results, fields) {
+        if (error) throw error;
+        res.json(results);
+      }
+    );
+});
+
   //Get specific question and answer according to the question ID
   app.route('/test/:questionId')
   .get(function(req, res, next) {
@@ -114,6 +116,46 @@ app.route('/count')
     });
   });
 
+//Get one saved answer according to the question id and user id
+app.get("/test/:questionId/:userId", async(req, res) =>{
+  const data = {
+      qid: req.params.questionId,
+      uid: req.params.userId
+  }
+  const sql = "SELECT id, id_answer FROM saved WHERE id_question = ? AND id_user = ?";
+  connection.query(sql, Object.values(data), function(err, userAnswer) {
+    if (err) {
+      console.log(sql);
+      return console.log('error: ' + err.message);
+    }
+    //send the freakin thing out
+    res.json({
+      Answer : userAnswer
+    });
+  });
+});
+
+//post or update saved answer to 'answer' table
+app.patch("/test/:questionId/:userId/:answerId", async(req, res) =>{
+  const data = {
+      sid: req.body.sid,
+      qid: req.params.questionId,
+      uid: req.params.userId,
+      aid: req.params.answerId
+  }
+  console.log(Object.values(data));
+  // const sql = "REPLACE INTO saved(id_question, id_user, id_answer) VALUES( ?, ?, ? )";
+  const sql = "INSERT INTO saved VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id_answer=?;";
+  connection.query(sql, [data.sid, data.uid, data.qid, data.aid, data.aid], function(err, userAnswer) {
+    if (err) {
+      console.log(sql);
+      return console.log('error: ' + err.message);
+    }
+    //send the freakin thing out
+    res.json(data);
+  });
+});
+
 //get a specific venture
 app.route('/usaha/:usahaId')
   .get(function(req, res, next) {
@@ -126,6 +168,20 @@ app.route('/usaha/:usahaId')
     );
   });
 
+//Get all saved answer according to the user id
+app.get("/answered/:userId", async(req, res) =>{
+  const data = req.params.userId;
+  const sql = "SELECT * FROM saved WHERE id_user = ? ORDER BY id_question ASC";
+  connection.query(sql, data, function(err, userAnswer) {
+    if (err) {
+      console.log(sql);
+      return console.log('error: ' + err.message);
+    }
+    res.json({
+      Answered : userAnswer
+    });
+  });
+});
 
   //post hasil test ke history
   //in construction
