@@ -1,7 +1,13 @@
 # BusahaAPI
 
 # **sign up** -> POST
-endpoint : http://localhost:3000/signup\
+endpoint : http://localhost:3000/signup
+request sample:\
+{\
+    "username" : "Billah",\
+    "email" : "gmail@gmail.com",\
+    "pass" : "123456"\
+}
 
 response sample:\
 {\
@@ -17,8 +23,12 @@ response sample:\
 }
 
 # **log in** -> POST
-endpoint : https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf5XUb2UPJvQu6nzPKDgR-GpUG49v-vVY\
-
+endpoint : https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf5XUb2UPJvQu6nzPKDgR-GpUG49v-vVY
+request sample:\
+{\
+    "email":"hellso@gmail.com",\
+    "password":"123456"\
+}
 response sample:\
 {\
     "kind": "identitytoolkit#VerifyPasswordResponse",\
