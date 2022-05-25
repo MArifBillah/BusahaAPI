@@ -28,36 +28,17 @@ endpoint : http://localhost:3000/signin
 
 request sample:\
 {\
-    "email":"hellso@gmail.com",\
+    "email":"emailcontoh9aja@mail.com",\
     "password":"123456"\
 }
 response sample:\
 {\
-    "status": "success",\
-    "data": {\
-        "uid": "KujxeSbItfUZRcjN23KJ0YQWwX02",\
-        "email": "emailcontoh11aja@mail.com",\
-        "emailVerified": true,\
-        "displayName": "Arif Billah",\
-        "isAnonymous": false,\
-        "providerData": [\
-            {\
-                "providerId": "password",\
-                "uid": "emailcontoh11aja@mail.com",\
-                "displayName": "Arif Billah",\
-                "email": "emailcontoh11aja@mail.com",\
-                "phoneNumber": null,\
-                "photoURL": null\
-            }\
-        ],\
-        "stsTokenManager": {\
-            "refreshToken": "AIwUaOmVQMmyFXgnVSZfBk-CTHepDATnbU4Od8ZmH3AyzmnGrHhtEdMGOjCHri1twgWaO8k3VQXk79yUs3h8PUbxW7_5kZScjsjt-Ik4bs-EesV1u4wxKa8GHzoaMI2zIM9wTP1pLYcYOkDcYJBENB4yR2cwdAMJwUPWdP10lwx4gr8a4_pbnsYeUGjn-AToa4umyDmR_dsos5JpDH-3c8naTm49ImhqEQ",\
-            "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmOGUxY2IxNTY0MTQ2M2M2ZGYwZjMzMzk0YjAzYzkyZmNjODg5YWMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQXJpZiBCaWxsYWgiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYnVzYWhhIiwiYXVkIjoiYnVzYWhhIiwiYXV0aF90aW1lIjoxNjUzNDY4NjQxLCJ1c2VyX2lkIjoiS3VqeGVTYkl0ZlVaUmNqTjIzS0owWVFXd1gwMiIsInN1YiI6Ikt1anhlU2JJdGZVWlJjak4yM0tKMFlRV3dYMDIiLCJpYXQiOjE2NTM0Njg2NDEsImV4cCI6MTY1MzQ3MjI0MSwiZW1haWwiOiJlbWFpbGNvbnRvaDExYWphQG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiZW1haWxjb250b2gxMWFqYUBtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.rJ3p94LlglFuzM68VCmslzLJ7oBGYxvyjq2ZKtKArsRvAF7rVz1RVRz0fVBVKpe6_BQxKqGkEccRGO_lUmGJsa9YkTloJDSJ6ir4u9wAcGhbQe-HBdHq2ZrUT4iKxg497-BFszvcuO1gTROtxBGIByQdQl871fHZXzLPTaeJ7uzuQSLV6nHPfvyA9kdUdi-x8c5Dl9Hb6BUC--pdN7QezICHEcCTuPzeG1GEzinGaIG56UkoKMazgC1wZJLus7Z3zTlVzStxAlmo_3z33YSydktFVy6m7YqpLv62aJ_kdltKr_bBNikZmvZeA8cfTmp_qBZ553XLbD6GJBAkyx8B1Q",\
-            "expirationTime": 1653472241731\
-        },\
-        "createdAt": "1653149975585",\
-        "lastLoginAt": "1653468641565",\
-        "apiKey": "AIzaSyDf5XUb2UPJvQu6nzPKDgR-GpUG49v-vVY",\
-        "appName": "[DEFAULT]"\
+    "Error": false,\
+    "Message": "Log in Success!",\
+    "loginResult": {\
+        "userID": "j6wJlUrJm1ZJsDlDGOIjJUrEGTa2",\
+        "username": "Arif Billah",\
+        "refreshToken": "AIwUaOmZBK3ErM6e6r-JN6fDPQ62887giYBFVM8jO_toiGjFoX3xFxC0alzpHwNkfStTtwWTrNzpVbS7F34U3hBUJoCz3FzgdKUU4BRJHKHfQbPV1GH4Et_Ps_N3lpY0dO9vs5xEMUKk2UxQNNDi_-kWwOlUBDB_74vz9H1S17hkavxuLD7mCJcDFDj7Q5I7NvZ-AgZ-o6dLcXOt7Fc6HyG_kL_0PN9qqA",\
+        "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmOGUxY2IxNTY0MTQ2M2M2ZGYwZjMzMzk0YjAzYzkyZmNjODg5YWMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQXJpZiBCaWxsYWgiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYnVzYWhhIiwiYXVkIjoiYnVzYWhhIiwiYXV0aF90aW1lIjoxNjUzNDc2MjY1LCJ1c2VyX2lkIjoiajZ3SmxVckptMVpKc0RsREdPSWpKVXJFR1RhMiIsInN1YiI6Imo2d0psVXJKbTFaSnNEbERHT0lqSlVyRUdUYTIiLCJpYXQiOjE2NTM0NzYyNjUsImV4cCI6MTY1MzQ3OTg2NSwiZW1haWwiOiJlbWFpbGNvbnRvaDlhamFAbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJlbWFpbGNvbnRvaDlhamFAbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.vPZLiTeaw9RULnFaxjIu02l-a9HaaBouPfBFaBjbxibINHkXEIpCp5TEt0kwq9L3bUwgif9twR1kL94rSHwyfB6TBYc1Jn1jg0NxzJikWKC_wi-XQWHAtvRZN487qSltLwZFVxjgVlABTZCOTbrAlXFob64AmNVn8H7860_UXZl128DnDj6VCG0FwFNoIyXIWbE2khX0Wu335YKXfZlm9-JIvuYalAMTJkkjH0Lz5gVxdkIkJvrdBxTajMBeUGa9brD0AWuElBxWgjRRJXgMOwsAZ0vY0jk_BwgaXIXCMdq_SXJb-K48Xkok8U0TgpFRtT054e4kgrIypvrqAyrnMw"\
     }\
-}\
+}
