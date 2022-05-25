@@ -24,7 +24,7 @@ response sample:\
 }
 
 # **log in** -> POST
-endpoint : https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf5XUb2UPJvQu6nzPKDgR-GpUG49v-vVY
+endpoint : http://localhost:3000/signin
 
 request sample:\
 {\
@@ -33,10 +33,31 @@ request sample:\
 }
 response sample:\
 {\
-    "kind": "identitytoolkit#VerifyPasswordResponse",\
-    "localId": "orCFGgSUkwZn9K1FNYRwpzrTK2T2",\
-    "email": "emailcontoh10aja@mail.com",\
-    "displayName": "Arif Billah",\
-    "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6InRCME0yQSJ9.eyJpc3MiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGUuY29tLyIsImF1ZCI6ImJ1c2FoYSIsImlhdCI6MTY1MzE1MDAyMiwiZXhwIjoxNjU0MzU5NjIyLCJ1c2VyX2lkIjoib3JDRkdnU1Vrd1puOUsxRk5ZUndwenJUSzJUMiIsImVtYWlsIjoiZW1haWxjb250b2gxMGFqYUBtYWlsLmNvbSIsInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCIsInZlcmlmaWVkIjp0cnVlLCJkaXNwbGF5X25hbWUiOiJBcmlmIEJpbGxhaCJ9.RmDKJCTD_obbX1T_W-kyJRc-IL4YYKdW-Ku9ES4wbA20kdZCYCwaDdGA8ClBU4XDHoqq5lDtyfZSoYt-menmTHby8d9fgEzNht3vtnm0I6ACLQ3cPWuiPAlBmzOWnX2Z_7J1KQsOF0QXyTMRH7K8JLvDoRYNmpFD41o4U3bTpywbOrexjQZLkE_Iy2sfeQY48RhsKVrtb7aINx1-YgxaRkxXPMUune0CuqYo9_MoTZg1y6U0VerQngJ3FlpiR6Mp3gy2RBeW0HYe3kTBydjY66_Z2nv69RCMPnlvzNHMOYhCdS5_eN-sCF2kOzFD8ue-N-zZhs9FuPMomsW-d4OIZA",\
-    "registered": true\
-}
+    "status": "success",\
+    "data": {\
+        "uid": "KujxeSbItfUZRcjN23KJ0YQWwX02",\
+        "email": "emailcontoh11aja@mail.com",\
+        "emailVerified": true,\
+        "displayName": "Arif Billah",\
+        "isAnonymous": false,\
+        "providerData": [\
+            {\
+                "providerId": "password",\
+                "uid": "emailcontoh11aja@mail.com",\
+                "displayName": "Arif Billah",\
+                "email": "emailcontoh11aja@mail.com",\
+                "phoneNumber": null,\
+                "photoURL": null\
+            }\
+        ],\
+        "stsTokenManager": {\
+            "refreshToken": "AIwUaOmVQMmyFXgnVSZfBk-CTHepDATnbU4Od8ZmH3AyzmnGrHhtEdMGOjCHri1twgWaO8k3VQXk79yUs3h8PUbxW7_5kZScjsjt-Ik4bs-EesV1u4wxKa8GHzoaMI2zIM9wTP1pLYcYOkDcYJBENB4yR2cwdAMJwUPWdP10lwx4gr8a4_pbnsYeUGjn-AToa4umyDmR_dsos5JpDH-3c8naTm49ImhqEQ",\
+            "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmOGUxY2IxNTY0MTQ2M2M2ZGYwZjMzMzk0YjAzYzkyZmNjODg5YWMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQXJpZiBCaWxsYWgiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYnVzYWhhIiwiYXVkIjoiYnVzYWhhIiwiYXV0aF90aW1lIjoxNjUzNDY4NjQxLCJ1c2VyX2lkIjoiS3VqeGVTYkl0ZlVaUmNqTjIzS0owWVFXd1gwMiIsInN1YiI6Ikt1anhlU2JJdGZVWlJjak4yM0tKMFlRV3dYMDIiLCJpYXQiOjE2NTM0Njg2NDEsImV4cCI6MTY1MzQ3MjI0MSwiZW1haWwiOiJlbWFpbGNvbnRvaDExYWphQG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiZW1haWxjb250b2gxMWFqYUBtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.rJ3p94LlglFuzM68VCmslzLJ7oBGYxvyjq2ZKtKArsRvAF7rVz1RVRz0fVBVKpe6_BQxKqGkEccRGO_lUmGJsa9YkTloJDSJ6ir4u9wAcGhbQe-HBdHq2ZrUT4iKxg497-BFszvcuO1gTROtxBGIByQdQl871fHZXzLPTaeJ7uzuQSLV6nHPfvyA9kdUdi-x8c5Dl9Hb6BUC--pdN7QezICHEcCTuPzeG1GEzinGaIG56UkoKMazgC1wZJLus7Z3zTlVzStxAlmo_3z33YSydktFVy6m7YqpLv62aJ_kdltKr_bBNikZmvZeA8cfTmp_qBZ553XLbD6GJBAkyx8B1Q",\
+            "expirationTime": 1653472241731\
+        },\
+        "createdAt": "1653149975585",\
+        "lastLoginAt": "1653468641565",\
+        "apiKey": "AIzaSyDf5XUb2UPJvQu6nzPKDgR-GpUG49v-vVY",\
+        "appName": "[DEFAULT]"\
+    }\
+}\
