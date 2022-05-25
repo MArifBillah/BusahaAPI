@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const firebase = require("firebase-admin");
+// const fire = require("firebase");
+const fireb = require('firebase/app');
 
 // var firebaseConfig = {
 //   apiKey: "AIzaSyBMVbnRQF6agOjlvR39imuGf_ckk7f4Uvs",
@@ -22,6 +24,8 @@ var firebaseConfig = {
 }
 var serviceAccount = require("./credential.json");
 
+fireb.initializeApp(firebaseConfig);
+
 firebase.initializeApp({
 credential: firebase.credential.cert(serviceAccount)
 });
@@ -42,3 +46,4 @@ let connection = mysql.createConnection({
   });
 
   module.exports = connection;
+  // module.exports = fire;

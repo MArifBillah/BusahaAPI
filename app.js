@@ -1,5 +1,6 @@
 require('dotenv').config()
 const admin = require("firebase-admin");
+const fireb = require('firebase/auth');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -55,13 +56,34 @@ app.use(express.json());
     }
   })
 
+  //Log in to firebase auth
+  app.post("/signin", async (req, res) => {
+    const user = {
+      email : req.body.email,
+      password: req.body.password
+    }
+    const auth = fireb.getAuth();
+    fireb.signInWithEmailAndPassword(auth, user.email, user.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        res.json({status: "success", data: user});
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        res.json({status: "failure", reason: errorMessage});
+      });
+  })
+
 
 //get user data according to ID
 app.route('/user/:userId')
   .get(function(req, res, next) {
     connection.query(
       'SELECT * FROM user WHERE id = ?', req.params.userId,
-      function(error, results, fields) {
+      function(error, results) {
         if (error) throw error;
         res.json(results);
       }
@@ -69,28 +91,50 @@ app.route('/user/:userId')
   });
 
 //Count all the questions in 'questions table'
-app.route('/count')
-  .get(function(req, res, next) {
-    connection.query(
-      'SELECT count(*) FROM questions',
-      function(error, results, fields) {
-        if (error) throw error;
-        res.json(results);
-      }
-    );
-  });
+// app.route('/count')
+//   .get(function(req, res, next) {
+//     connection.query(
+//       'SELECT count(*) FROM questions',
+//       function(error, results, fields) {
+//         if (error) throw error;
+//         res.json(results);
+//       }
+//     );
+//   });
 
 //get all questions in the database 
-app.route('/test')
+// app.route('/test')
+//   .get(function(req, res, next) {
+//     connection.query(
+//       'SELECT * FROM questions',
+//       function(error, results, fields) {
+//         if (error) throw error;
+//         res.json(results);
+//       }
+//     );
+// });
+
+  //Count all question and then get all questions
+  app.route('/test')
   .get(function(req, res, next) {
-    connection.query(
-      'SELECT * FROM questions',
-      function(error, results, fields) {
-        if (error) throw error;
-        res.json(results);
+    const sql = "SELECT count(*) FROM questions";
+    connection.query(sql, function(err, count) {
+      if (err) {
+        return console.log('error: ' + err.message);
       }
-    );
-});
+      const sql = "SELECT * FROM questions";
+      connection.query(sql, function(err, question) {
+        if (err) {
+          return console.log('error: ' + err.message);
+        }
+        //send the freakin thing out
+        res.json({
+          Count: count,
+          Questions: question
+        });
+      });
+    });
+  });
 
   //Get specific question and answer according to the question ID
   app.route('/test/:questionId')
@@ -128,7 +172,6 @@ app.get("/test/:questionId/:userId", async(req, res) =>{
       console.log(sql);
       return console.log('error: ' + err.message);
     }
-    //send the freakin thing out
     res.json({
       Answer : userAnswer
     });
@@ -143,8 +186,6 @@ app.patch("/test/:questionId/:userId/:answerId", async(req, res) =>{
       uid: req.params.userId,
       aid: req.params.answerId
   }
-  console.log(Object.values(data));
-  // const sql = "REPLACE INTO saved(id_question, id_user, id_answer) VALUES( ?, ?, ? )";
   const sql = "INSERT INTO saved VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id_answer=?;";
   connection.query(sql, [data.sid, data.uid, data.qid, data.aid, data.aid], function(err, userAnswer) {
     if (err) {
@@ -183,6 +224,19 @@ app.get("/answered/:userId", async(req, res) =>{
   });
 });
 
+//delete all saved answer according to the user id
+app.delete("/answered/clean/:userId", async(req, res) =>{
+  const data = req.params.userId;
+  const sql = "DELETE FROM saved WHERE id_user = ?";
+  connection.query(sql, data, function(err) {
+    if (err) {
+      console.log(sql);
+      return console.log('error: ' + err.message);
+    }
+      res.json({status: "Data successfully Deleted", data: data});    
+  });
+});
+
   //post hasil test ke history
   //in construction
   app.post("/history", async(req, res) =>{
@@ -205,7 +259,7 @@ app.get("/answered/:userId", async(req, res) =>{
     });
 });
 
-//ambil history test user dari database
+//GET history test user from database
 app.route('/test/history/:userId')
   .get(function(req, res, next) {
     connection.query(
