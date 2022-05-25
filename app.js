@@ -46,7 +46,7 @@ app.use(express.urlencoded({extended: true}));
           if (error){
               res.json({status: "failure", reason: error.code});
           }else{
-              res.json({status: "success", data: data});            
+              res.json({Error: "false", message: "User Created"});            
           }
       });
 
@@ -69,13 +69,22 @@ app.use(express.urlencoded({extended: true}));
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        res.json({status: "success", data: user});
+        res.json({
+          Error: false,
+          Message: "Log in Success!",
+          loginResult: {
+            userID : user.uid,
+            username : user.displayName,
+            refreshToken: user.refreshToken,
+            accessToken: user.accessToken
+          }
+        });
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        res.json({status: "failure", reason: errorCode, Msg : errorMessage });
+        res.json({status: "failure", code: errorCode, reason: errorMessage, Msg : "Email atau Password Salah" });
       });
   })
 
@@ -87,7 +96,7 @@ app.route('/user/:userId')
       'SELECT * FROM user WHERE id = ?', req.params.userId,
       function(error, results) {
         if (error) throw error;
-        res.json(results);
+        res.json({results});
       }
     );
   });
@@ -130,7 +139,10 @@ app.route('/user/:userId')
           return console.log('error: ' + err.message);
         }
         //send the freakin thing out
+        // var i = JSON.stringify(count);
         res.json({
+          Error: false,
+          Message: "Success",
           Count: count,
           Questions: question
         });
