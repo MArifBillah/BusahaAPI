@@ -3,14 +3,14 @@
 # **sign up** -> POST
 endpoint : http://localhost:3000/signup
 
-request sample:\
+**request sample:**\
 {\
     "username" : "Billah",\
     "email" : "gmail@gmail.com",\
     "pass" : "123456"\
 }
 
-response sample:\
+**response sample:**\
 {\
     "status": "success",\
     "data": {\
@@ -26,12 +26,13 @@ response sample:\
 # **log in** -> POST
 endpoint : http://localhost:3000/signin
 
-request sample:\
+**request sample:**\
 {\
     "email":"emailcontoh9aja@mail.com",\
     "password":"123456"\
 }
-response sample:\
+
+**response sample:**\
 {\
     "Error": false,\
     "Message": "Log in Success!",\
