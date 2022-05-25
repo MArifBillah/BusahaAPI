@@ -9,8 +9,8 @@ endpoint : http://localhost:3000/signup
     "email" : "gmail@gmail.com",\
     "pass" : "123456"\,
     "dob" : "2001-01-01",\
-    "gender" : "L",
-    "status" : "Bekerja"
+    "gender" : "L",\
+    "status" : "Bekerja"\
 }
 
 **response sample:**\
