@@ -6,7 +6,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database');
 const dateTime = require('node-datetime');
-app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 
 // sign up user with firebase and then send the data into mysql
@@ -62,8 +62,10 @@ app.use(express.json());
       email : req.body.email,
       password: req.body.password
     }
+    const email = user.email;
+    const password = user.password;
     const auth = fireb.getAuth();
-    fireb.signInWithEmailAndPassword(auth, user.email, user.password)
+    fireb.signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
@@ -73,7 +75,7 @@ app.use(express.json());
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        res.json({status: "failure", reason: errorMessage});
+        res.json({status: "failure", reason: errorCode, Msg : errorMessage });
       });
   })
 
