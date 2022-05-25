@@ -7,7 +7,7 @@ endpoint : http://localhost:3000/signup
 {\
     "username" : "Billah",\
     "email" : "gmail@gmail.com",\
-    "pass" : "123456"\,
+    "pass" : "123456",\
     "dob" : "2001-01-01",\
     "gender" : "L",\
     "status" : "Bekerja"\
