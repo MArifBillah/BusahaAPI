@@ -44,9 +44,9 @@ app.use(express.urlencoded({extended: true}));
       const query = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?)";
       connection.query(query, Object.values(data), (error)=>{
           if (error){
-              res.json({status: "failure", reason: error.code});
+              res.json({error: true, message: "User not created", reason: error.code});
           }else{
-              res.json({Error: "false", message: "User Created"});            
+              res.json({error: false, message: "User Created"});            
           }
       });
 
@@ -70,8 +70,8 @@ app.use(express.urlencoded({extended: true}));
         // Signed in 
         const user = userCredential.user;
         res.json({
-          Error: false,
-          Message: "Log in Success!",
+          error: false,
+          message: "Log in Success!",
           loginResult: {
             userID : user.uid,
             username : user.displayName,
@@ -79,51 +79,59 @@ app.use(express.urlencoded({extended: true}));
             accessToken: user.accessToken
           }
         });
-        // ...
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        res.json({status: "failure", code: errorCode, reason: errorMessage, Msg : "Email atau Password Salah" });
+        res.json({error: true, message : "Email or Password wrong", code: errorCode, reason: errorMessage });
       });
   })
 
 
-//get user data according to ID
-app.route('/user/:userId')
-  .get(function(req, res, next) {
-    connection.query(
-      'SELECT * FROM user WHERE id = ?', req.params.userId,
-      function(error, results) {
-        if (error) throw error;
-        res.json({results});
-      }
-    );
-  });
-
-//Count all the questions in 'questions table'
-// app.route('/count')
+//get user data according to ID (DEPRECATED)
+// app.route('/user/:userId')
 //   .get(function(req, res, next) {
+
 //     connection.query(
-//       'SELECT count(*) FROM questions',
-//       function(error, results, fields) {
-//         if (error) throw error;
-//         res.json(results);
+//       'SELECT * FROM user WHERE id = ?', req.params.userId,
+//       function(error, results) {
+//         if (error || results == 0){
+//           res.json({
+//             error : true,
+//             message: "failed to retrieve user data",
+//             reason: error
+//           });
+//         };
+//         res.json({
+//           error : false,
+//           message : "success",
+//           user : results
+//         });
 //       }
 //     );
 //   });
-
-//get all questions in the database 
-// app.route('/test')
-//   .get(function(req, res, next) {
-//     connection.query(
-//       'SELECT * FROM questions',
-//       function(error, results, fields) {
-//         if (error) throw error;
-//         res.json(results);
-//       }
-//     );
-// });
+  //get user data according to ID
+  app.route('/user/:userId')
+  .get(function(req, res) {
+    const data = req.params.userId;
+    const sql = "SELECT * FROM user WHERE id = ?";
+    connection.query(sql, data, function(err, result) {
+      if (err || result == 0) {
+        res.json({
+          error : true,
+          message: "failed to retrieve user data or user doesn't exist",
+          reason: err
+        });
+      }else{
+        res.json({
+          error : false,
+          message : "success",
+          user : result
+        });
+      }
+    });
+  });
 
   //Count all question and then get all questions
   app.route('/test')
@@ -131,21 +139,30 @@ app.route('/user/:userId')
     const sql = "SELECT count(*) FROM questions";
     connection.query(sql, function(err, count) {
       if (err) {
-        return console.log('error: ' + err.message);
+        res.json({
+          error : true,
+          message: "failed to count questions",
+          reason: err
+        });
       }
       const sql = "SELECT * FROM questions";
       connection.query(sql, function(err, question) {
         if (err) {
-          return console.log('error: ' + err.message);
+          res.json({
+            error : true,
+            message: "failed to retrieve questions or table empty",
+            reason: err
+          });
+        }else{
+          //send the freakin thing out
+          // var i = JSON.stringify(count);
+          res.json({
+            Error: false,
+            Message: "Success",
+            Count: count,
+            Questions: question
+          });
         }
-        //send the freakin thing out
-        // var i = JSON.stringify(count);
-        res.json({
-          Error: false,
-          Message: "Success",
-          Count: count,
-          Questions: question
-        });
       });
     });
   });
@@ -157,20 +174,33 @@ app.route('/user/:userId')
 
     const sql = "SELECT * FROM questions WHERE id = ?";
     connection.query(sql, data, function(err, question) {
-      if (err) {
-        return console.log('error: ' + err.message);
-      }
-      const sql = "SELECT * FROM answer WHERE question_id = ?";
-      connection.query(sql, data, function(err, answer) {
-        if (err) {
-          return console.log('error: ' + err.message);
-        }
-        //send the freakin thing out
+      if (err || question == 0) {
         res.json({
-          Question: question,
-          Answer: answer
+          error : true,
+          message: "failed to retrieve question or question empty",
+          reason: err
         });
-      });
+      }else{
+        const sql = "SELECT * FROM answer WHERE question_id = ?";
+        connection.query(sql, data, function(err, answer) {
+          if (err || answer == 0) {
+            res.json({
+              error : true,
+              message: "failed to retrieve answer or answer empty",
+              reason: err
+            });
+          }else{
+                        //send the freakin thing out
+            res.json({
+              error : false,
+              message : "Success", 
+              question : question,
+              answer : answer
+            });
+          }
+        });
+      }
+
     });
   });
 
@@ -183,12 +213,18 @@ app.get("/test/:questionId/:userId", async(req, res) =>{
   const sql = "SELECT id, id_answer FROM saved WHERE id_question = ? AND id_user = ?";
   connection.query(sql, Object.values(data), function(err, userAnswer) {
     if (err) {
-      console.log(sql);
-      return console.log('error: ' + err.message);
+      res.json({
+        error : true,
+        message: "failed to retrieve user's answer",
+        reason: err
+      });
+    }else{
+      res.json({
+        error : false,
+        message : "success",
+        Answer : userAnswer
+      });
     }
-    res.json({
-      Answer : userAnswer
-    });
   });
 });
 
@@ -203,11 +239,21 @@ app.patch("/test/:questionId/:userId/:answerId", async(req, res) =>{
   const sql = "INSERT INTO saved VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id_answer=?;";
   connection.query(sql, [data.sid, data.uid, data.qid, data.aid, data.aid], function(err, userAnswer) {
     if (err) {
-      console.log(sql);
-      return console.log('error: ' + err.message);
+      // console.log(sql);
+      res.json({
+        error : true,
+        message: "failed to retrieve user's answer",
+        reason: err
+      });
+    }else{
+      //send the freakin thing out
+      res.json({
+        error : false,
+        message : "success",
+        data : data
+      });
     }
-    //send the freakin thing out
-    res.json(data);
+
   });
 });
 
@@ -216,9 +262,20 @@ app.route('/usaha/:usahaId')
   .get(function(req, res, next) {
     connection.query(
       'select * from result where id = ?', req.params.usahaId,
-      function(error, results, fields) {
-        if (error) throw error;
-        res.json(results);
+      function(error, results) {
+        if (error){
+          res.json({
+            error : true,
+            message : "failed to retrieve",
+            result : results
+          });
+        }else{
+          res.json({
+            error : false,
+            message : "success",
+            result : results
+          });
+        }
       }
     );
   });
@@ -228,13 +285,19 @@ app.get("/answered/:userId", async(req, res) =>{
   const data = req.params.userId;
   const sql = "SELECT * FROM saved WHERE id_user = ? ORDER BY id_question ASC";
   connection.query(sql, data, function(err, userAnswer) {
-    if (err) {
-      console.log(sql);
-      return console.log('error: ' + err.message);
+    if (err || userAnswer == 0) {
+      res.json({
+        error: true,
+        message: "failed to retrieve user answer, user probably haven't answered or user doesn't exist",
+        answered : userAnswer
+      });
+    }else{
+      res.json({
+        error: false,
+        message: "success",
+        answered : userAnswer
+      });
     }
-    res.json({
-      Answered : userAnswer
-    });
   });
 });
 
@@ -242,12 +305,12 @@ app.get("/answered/:userId", async(req, res) =>{
 app.delete("/answered/clean/:userId", async(req, res) =>{
   const data = req.params.userId;
   const sql = "DELETE FROM saved WHERE id_user = ?";
-  connection.query(sql, data, function(err) {
-    if (err) {
-      console.log(sql);
-      return console.log('error: ' + err.message);
+  connection.query(sql, data, function(err, deleted) {
+    if (err || deleted.affectedRows == 0) {
+      res.json({error : true, message: "failed to delete user answer or user doesn't exist or answer already empty", data: deleted});   
+    }else{
+      res.json({error : false, message: "Data successfully Deleted", DataDeleted: deleted.affectedRows, userID : data});    
     }
-      res.json({status: "Data successfully Deleted", data: data});    
   });
 });
 
@@ -265,22 +328,25 @@ app.delete("/answered/clean/:userId", async(req, res) =>{
     }
     const query = "INSERT INTO history(id_user,result,description,percentage,time) VALUES (?, ?, ?, ?, ?)";
     connection.query(query, Object.values(data), (error)=>{
-        if (error){
-            res.json({status: "failure", reason: error.code});
+        if (error || data.id_user == 0 || data.result == 0 || data.description == 0 || data.percentage == 0){
+            res.json({error : true, message: "failure, error or one of the field is null", reason: error});
         }else{
-            res.json({status: "success", data: data});            
+            res.json({error : false, message: "success", data: data});            
         }
     });
 });
 
 //GET history test user from database
-app.route('/test/history/:userId')
+app.route('/history/:userId')
   .get(function(req, res, next) {
     connection.query(
-      'select * from history where id_user = ?', req.params.userId,
-      function(error, results, fields) {
-        if (error) throw error;
-        res.json(results);
+      'SELECT * FROM history WHERE id_user = ?', req.params.userId,
+      function(error, result) {
+        if (error){
+          res.json({error : true, message: "failure", reason: error});
+        }else{
+          res.json({error : false, message: "success", data: result});            
+      }
       }
     );
 });
@@ -292,9 +358,9 @@ app.delete("/test/history/delete", async(req, res) =>{
     const query = "DELETE FROM history where id = ?";
     connection.query(query, Object.values(data), (error)=>{
         if (error){
-            res.json({status: "Fail, data not deleted", reason: error.code});
+            res.json({error : true, message: "Fail, data not deleted", reason: error.code});
         }else{
-            res.json({status: "Data successfully Deleted", data: data});            
+            res.json({error : false, message: "Data successfully Deleted", data: data});            
         }
     });
 });
