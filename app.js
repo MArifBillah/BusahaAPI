@@ -144,26 +144,27 @@ app.use(express.urlencoded({extended: true}));
           message: "failed to count questions",
           reason: err
         });
+      }else{
+        const sql = "SELECT * FROM questions";
+        connection.query(sql, function(err, question) {
+          if (err) {
+            res.json({
+              error : true,
+              message: "failed to retrieve questions or table empty",
+              reason: err
+            });
+          }else{
+            //send the freakin thing out
+            // var i = JSON.stringify(count);
+            res.json({
+              Error: false,
+              Message: "Success",
+              Count: count,
+              Questions: question
+            });
+          }
+        });
       }
-      const sql = "SELECT * FROM questions";
-      connection.query(sql, function(err, question) {
-        if (err) {
-          res.json({
-            error : true,
-            message: "failed to retrieve questions or table empty",
-            reason: err
-          });
-        }else{
-          //send the freakin thing out
-          // var i = JSON.stringify(count);
-          res.json({
-            Error: false,
-            Message: "Success",
-            Count: count,
-            Questions: question
-          });
-        }
-      });
     });
   });
 
@@ -369,7 +370,5 @@ app.delete("/test/history/delete", async(req, res) =>{
 app.get('/status', (req, res) => res.send('Working!'));
 
 // Port 8080 for Google App Engine
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log('Hello world listening on port', port);
-});
+app.set('port', process.env.PORT || 3000);
+app.listen(3000);
