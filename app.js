@@ -242,7 +242,7 @@ app.patch("/test/:questionId/:userId/:answerId", async(req, res) =>{
       // console.log(sql);
       res.json({
         error : true,
-        message: "failed to retrieve user's answer",
+        message: "failed to save user's answer",
         reason: err
       });
     }else{

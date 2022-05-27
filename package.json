@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./app.js"
   },
-  "author": "",
+  "author": "Muhammad Arif Billah",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
