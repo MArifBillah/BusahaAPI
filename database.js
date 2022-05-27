@@ -30,10 +30,10 @@ credential: firebase.credential.cert(serviceAccount)
 });
 
 let connection = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASS
+    user: process.env.DB_USER, // e.g. 'my-db-user'
+    password: process.env.DB_PASS, // e.g. 'my-db-password'
+    database: process.env.DB_NAME, // e.g. 'my-database'
+    socketPath: '/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}'
 });
 
   // connection.connect(function(err) {
