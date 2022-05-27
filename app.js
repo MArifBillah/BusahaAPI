@@ -369,5 +369,7 @@ app.delete("/test/history/delete", async(req, res) =>{
 app.get('/status', (req, res) => res.send('Working!'));
 
 // Port 8080 for Google App Engine
-app.set('port', process.env.PORT || 3000);
-app.listen(3000);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log('Hello world listening on port', port);
+});
