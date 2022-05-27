@@ -371,5 +371,10 @@ app.get('/status', (req, res) => res.send('Working!'));
 // Port 8080 for Google App Engine
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
+	console.log(process.env.DB_USER);
+	console.log(process.env.DB_NAME);
+	console.log(process.env.DB_PASS)
+console.log(process.env.INSTANCE_CONNECTION_NAME);
+console.log(`/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`);
   console.log('Hello world listening on port', port);
 });

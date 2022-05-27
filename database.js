@@ -21,7 +21,7 @@ var firebaseConfig = {
   appId: "1:721677036288:web:ecdc893bbd100fbd6161e5",
   measurementId: "G-JR3XJJK4TG"
 }
-var serviceAccount = require("./credential.json");
+var serviceAccount = require("./cred.json");
 
 fireb.initializeApp(firebaseConfig);
 
@@ -33,7 +33,8 @@ let connection = mysql.createPool({
     user: process.env.DB_USER, // e.g. 'my-db-user'
     password: process.env.DB_PASS, // e.g. 'my-db-password'
     database: process.env.DB_NAME, // e.g. 'my-database'
-    socketPath: '/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}'
+    // If connecting via unix domain socket, specify the path
+    socketPath: `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`
 });
 
   // connection.connect(function(err) {
