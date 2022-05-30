@@ -4,7 +4,7 @@ const fireb = require('firebase/auth');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const connection = require('./database');
+const connection = require('./database.js');
 const dateTime = require('node-datetime');
 app.use(express.urlencoded({extended: true}));
 
@@ -125,6 +125,7 @@ app.use(express.urlencoded({extended: true}));
         });
       }else{
         res.json({
+working
           error : false,
           message : "success",
           user : result
@@ -144,7 +145,7 @@ app.use(express.urlencoded({extended: true}));
           message: "failed to count questions",
           reason: err
         });
-      }else{
+      }
       const sql = "SELECT * FROM questions";
       connection.query(sql, function(err, question) {
         if (err) {
@@ -164,7 +165,6 @@ app.use(express.urlencoded({extended: true}));
           });
         }
       });
-     }
     });
   });
 
@@ -231,33 +231,32 @@ app.get("/test/:questionId/:userId", async(req, res) =>{
 
 //post or update saved answer to 'answer' table
 app.patch("/test/:questionId/:userId/:answerId", async(req, res) =>{
-    const data = {
-        sid: req.body.sid,
-        qid: req.params.questionId,
-        uid: req.params.userId,
-        aid: req.params.answerId,
-        indeks: req.body.indeks
+  const data = {
+      sid: req.body.sid,
+      qid: req.params.questionId,
+      uid: req.params.userId,
+      aid: req.params.answerId
+  }
+  const sql = "INSERT INTO saved VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id_answer=?;";
+  connection.query(sql, [data.sid, data.uid, data.qid, data.aid, data.aid], function(err, userAnswer) {
+    if (err) {
+      // console.log(sql);
+      res.json({
+        error : true,
+        message: "failed to save user's answer",
+        reason: err
+      });
+    }else{
+      //send the freakin thing out
+      res.json({
+        error : false,
+        message : "success",
+        data : data
+      });
     }
-    const sql = "INSERT INTO saved VALUES (?, ?, ?, ?,?) ON DUPLICATE KEY UPDATE id_answer=?, indeks=?;";
-    connection.query(sql, [data.sid, data.uid, data.qid, data.aid, data.indeks, data.aid, data.indeks], function(err, userAnswer) {
-      if (err) {
-        console.log(sql);
-        res.json({
-          error : true,
-          message: "failed to save user's answer",
-          reason: err
-        });
-      }else{
-        console.log(sql);
-        //send the freakin thing out
-        res.json({
-          error : false,
-          message : "success",
-          data : data
-        });
-      }
-    });
+
   });
+});
 
 //get a specific venture
 app.route('/usaha/:usahaId')
