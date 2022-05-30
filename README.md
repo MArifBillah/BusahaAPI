@@ -1,7 +1,7 @@
-# BusahaAPI
+# BusahaAPI SUDAH BISA ONLINE BEBYY
 
 # **sign up** -> POST
-endpoint : http://localhost:3000/signup
+endpoint : https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signup \
 
 **request sample:**\
 {\
@@ -15,19 +15,12 @@ endpoint : http://localhost:3000/signup
 
 **response sample:**\
 {\
-    "status": "success",\
-    "data": {\
-        "id": "KujxeSbItfUZRcjN23KJ0YQWwX02",\
-        "username": "Arif Billah",\
-        "email": "emailcontoh11aja@mail.com",\
-        "dob": "2001-09-09",\
-        "gender": "P",\
-        "status": "mahasiswa"\
-    }\
+    "error": false,\
+    "message": "User Created"\
 }
 
 # **log in** -> POST
-endpoint : http://localhost:3000/signin
+endpoint : https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signin \
 
 **request sample:**\
 {\
