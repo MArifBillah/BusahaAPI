@@ -1,4 +1,4 @@
-**Endpoint:**
+## ENDPOINT
 
 ` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/status>
 
@@ -15,7 +15,7 @@
 |Working!|
 | - |
 
-**Endpoint:**
+## ENDPOINT
 
 ` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signup>
 
@@ -38,7 +38,7 @@
 | :- |
 
 
-**Endpoint:**
+## ENDPOINT
 
 ` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signin>
 
@@ -57,7 +57,7 @@
 | :- |
 
 
-**Endpoint:**
+## ENDPOINT
 
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/user/:userid>
 
@@ -78,7 +78,7 @@
 | :- |
 
 
-**Endpoint:**
+## ENDPOINT
 
 ` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test>
 
@@ -96,7 +96,7 @@
 | :- |
 
 
-**Endpoint:**
+## ENDPOINT
 
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId>
 
@@ -116,7 +116,7 @@
 |<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "Success",</p><p>`    `"question": [</p><p>`        `{</p><p>`            `"id": 1,</p><p>`            `"question": "Berapa modal usaha yang berani anda siapkan?"</p><p>`        `}</p><p>`    `],</p><p>`    `"answer": [</p><p>`        `{</p><p>`            `"answer\_id": 1,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "1 juta",</p><p>`            `"indeks": 1000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 2,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "1 - 10 juta",</p><p>`            `"indeks": 10000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 3,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "10 - 25 juta",</p><p>`            `"indeks": 25000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 4,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "Diatas 25 juta",</p><p>`            `"indeks": 100000000</p><p>`        `}</p><p>`    `]</p><p>}</p><p></p>|
 | :- |
 
-**Endpoint:**
+## ENDPOINT
 
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId>
 
@@ -138,7 +138,7 @@
 | :- |
 
 
-**Endpoint:**
+## ENDPOINT
 
 [https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId/:answerId](https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questiomId/:userId/:answerId)
 
@@ -168,7 +168,7 @@
 |<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"data": {</p><p>`        `"sid": "5",</p><p>`        `"qid": "3",</p><p>`        `"uid": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`        `"aid": "8",</p><p>`        `"indeks": "1"</p><p>`    `}</p><p>}</p>|
 | :- |
 
-**Endpoint:**
+## ENDPOINT
 
 ` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/usaha/:usahaId>
 
@@ -189,7 +189,7 @@
 | :- |
 
 
-**Endpoint:**
+## ENDPOINT
 
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/:userId>
 
@@ -210,7 +210,7 @@
 | :- |
 
 
-**Endpoint**
+## ENDPOINT
 
 ` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/clean/:userId>
 
@@ -231,7 +231,7 @@
 | :- |
 
 
-**Endpoint**
+## ENDPOINT
 
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/history>
 
@@ -255,7 +255,7 @@
 | :- |
 
 
-**Endpoint**
+## ENDPOINT
 
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/history/:userId>
 
@@ -276,7 +276,7 @@
 | :- |
 
 
-**Endpoint**
+## ENDPOINT
 
 ` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/history/delete>
 
