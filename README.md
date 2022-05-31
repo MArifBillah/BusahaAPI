@@ -1,6 +1,6 @@
 ## ENDPOINT
 
-` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/status>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/status>
 
 **Check Connection**
 
@@ -17,7 +17,7 @@
 
 ## ENDPOINT
 
-` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signup>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signup>
 
 **Register New User**
 
@@ -40,7 +40,7 @@
 
 ## ENDPOINT
 
-` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signin>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signin>
 
 **Log In**
 
@@ -80,7 +80,7 @@
 
 ## ENDPOINT
 
-` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test>
 
 **Count and Get All Questions**
 
@@ -170,7 +170,7 @@
 
 ## ENDPOINT
 
-` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/usaha/:usahaId>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/usaha/:usahaId>
 
 **Get Result**
 
@@ -212,7 +212,7 @@
 
 ## ENDPOINT
 
-` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/clean/:userId>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/clean/:userId>
 
 **Delete All of User’s Answer**
 
@@ -278,7 +278,7 @@
 
 ## ENDPOINT
 
-` `<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/history/delete>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/history/delete>
 
 **Delete History**
 
