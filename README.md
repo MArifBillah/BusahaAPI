@@ -11,7 +11,10 @@ This is the API for our app BUSAHA which stands for "Buka dan Buat Usaha". This 
 - GCP, this branch is the one being deployed to the Cloud Run and listens to port 8080. creds.json not provided.
 
 ## Technologies
--Node.js version : v16.14.0
+- Node.js version : v16.14.0
+- Google Cloud Platform
+- Firebase Auth
+
 ## Contact
 For further information you can contact:
 - arifbillahbill@gmail.com (Muhammad Arif Billah)
