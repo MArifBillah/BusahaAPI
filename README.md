@@ -1,8 +1,25 @@
-## ENDPOINT
+## C22-PS006-Cloud-Computing / BUSAHA
+##Table of Contents
+-General Information
+-Technologies
+-Contact
+-Documentation
 
+## General Info
+This is the API for our app BUSAHA which stands for "Buka dan Buat Usaha". This API is deployed using Google Cloud Platform's Cloud Run service and connected to the Cloud SQL database. This repository contains two branches:
+-Main, this branch is for development and testing purposes and only run on localhost with the provided local database. credentials.json not provided.
+-GCP, this branch is the one being deployed to the Cloud Run and listens to port 8080. creds.json not provided.
+
+## Technologies
+-Node.js version : v16.14.0
+## Contact
+For further information you can contact:\
+-arifbillahbill@gmail.com (Muhammad Arif Billah)
+
+## Check Connection
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/status>
 
-**Check Connection**
 
 - Url : 
   - /status
@@ -15,11 +32,10 @@
 |Working!|
 | - |
 
-## ENDPOINT
-
+## Register New Use
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signup>
 
-**Register New User**
 
 - Url :
   - /signup
@@ -38,11 +54,10 @@
 | :- |
 
 
-## ENDPOINT
-
+## Log In
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signin>
 
-**Log In**
 
 - Url :
   - /signin
@@ -57,11 +72,9 @@
 | :- |
 
 
-## ENDPOINT
-
+## Get User Details
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/user/:userid>
-
-**Get User Detail**
 
 - Url : 
   - /app/:userid
@@ -78,11 +91,9 @@
 | :- |
 
 
-## ENDPOINT
-
+## Count and Get All Questions
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test>
-
-**Count and Get All Questions**
 
 - Url :
   - /test
@@ -96,11 +107,9 @@
 | :- |
 
 
-## ENDPOINT
-
+## Get One Question and Answers Option
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId>
-
-**Get one Question and Answers** 
 
 - Url :
   - /test/:questionId
@@ -116,11 +125,9 @@
 |<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "Success",</p><p>`    `"question": [</p><p>`        `{</p><p>`            `"id": 1,</p><p>`            `"question": "Berapa modal usaha yang berani anda siapkan?"</p><p>`        `}</p><p>`    `],</p><p>`    `"answer": [</p><p>`        `{</p><p>`            `"answer\_id": 1,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "1 juta",</p><p>`            `"indeks": 1000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 2,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "1 - 10 juta",</p><p>`            `"indeks": 10000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 3,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "10 - 25 juta",</p><p>`            `"indeks": 25000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 4,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "Diatas 25 juta",</p><p>`            `"indeks": 100000000</p><p>`        `}</p><p>`    `]</p><p>}</p><p></p>|
 | :- |
 
-## ENDPOINT
-
+## Get a User's answer of a Specific Question
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId>
-
-**Get User’s Answer of a Specific Question**
 
 - Url :
   - /test/:questionId/:userId
@@ -138,11 +145,9 @@
 | :- |
 
 
-## ENDPOINT
-
-[https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId/:answerId](https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questiomId/:userId/:answerId)
-
-**Save User Answer**
+## Save User Answers
+**Endpoint :**\
+[https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId/:answerId](https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId/:answerId)
 
 - Url :
   - /test/:questionId/:userId/:answerId
@@ -168,11 +173,9 @@
 |<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"data": {</p><p>`        `"sid": "5",</p><p>`        `"qid": "3",</p><p>`        `"uid": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`        `"aid": "8",</p><p>`        `"indeks": "1"</p><p>`    `}</p><p>}</p>|
 | :- |
 
-## ENDPOINT
-
+## Get Result
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/usaha/:usahaId>
-
-**Get Result**
 
 - Url:
   - /usaha/:usahaId
@@ -189,11 +192,9 @@
 | :- |
 
 
-## ENDPOINT
-
+## Get All of User's Answer
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/:userId>
-
-**Get All of User’s Answer**
 
 - Url :
   - /answered/:userId
@@ -210,11 +211,9 @@
 | :- |
 
 
-## ENDPOINT
-
+## Delete All of User's Answer
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/clean/:userId>
-
-**Delete All of User’s Answer**
 
 - Url:
   - /answered/clean/:userId
@@ -231,11 +230,9 @@
 | :- |
 
 
-## ENDPOINT
-
+## Store User's Result Into History
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/history>
-
-**Post ML result into history**
 
 - Url :
   - /history
@@ -255,11 +252,10 @@
 | :- |
 
 
-## ENDPOINT
-
+## Get User’s Result History
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/history/:userId>
 
-**Get User’s Result History**
 
 - Url
   - /history/:userId
@@ -276,11 +272,10 @@
 | :- |
 
 
-## ENDPOINT
-
+## Delete User History
+**Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/history/delete>
 
-**Delete History**
 
 - Url :
   - /test/history/delete
