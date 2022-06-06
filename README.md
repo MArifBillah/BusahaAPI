@@ -16,6 +16,9 @@ This is the API for our app BUSAHA which stands for "Buka dan Buat Usaha". This 
 For further information you can contact:
 - arifbillahbill@gmail.com (Muhammad Arif Billah)
 
+
+## Documentation
+
 ## Check Connection
 **Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/status>
@@ -32,7 +35,7 @@ For further information you can contact:
 |Working!|
 | - |
 
-## Register New Use
+## Register New User
 **Endpoint :**\
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/signup>
 
