@@ -13,7 +13,7 @@ This is the API for our app BUSAHA which stands for "Buka dan Buat Usaha". This 
 ## Technologies
 -Node.js version : v16.14.0
 ## Contact
-For further information you can contact:\
+For further information you can contact:
 - arifbillahbill@gmail.com (Muhammad Arif Billah)
 
 ## Check Connection
