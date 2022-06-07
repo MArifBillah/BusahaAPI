@@ -24,11 +24,11 @@ For further information you can contact:
 
 ## Check Connection
 **Endpoint :**\
-<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/status>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app>
 
 
 - Url : 
-  - /status
+  - 
 - Method
   - GET
 - Request Body
@@ -83,7 +83,7 @@ For further information you can contact:
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/user/:userid>
 
 - Url : 
-  - /app/:userid
+  - /user/:userid
 - Method
   - GET
 - Request Parameter
