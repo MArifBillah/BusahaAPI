@@ -52,7 +52,7 @@ app.use(express.urlencoded({extended: true}));
 
     }catch(e){
       // console.log("nganu");
-      res.json({status: "failure", reason: e});
+      res.json({error: true, message: "User not created", reason: e.message});
     }
   })
 
