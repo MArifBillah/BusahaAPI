@@ -4,8 +4,9 @@ const fireb = require('firebase/auth');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const connection = require('./database');
+const connection = require('./database.js');
 const dateTime = require('node-datetime');
+const { json } = require('body-parser');
 app.use(express.urlencoded({extended: true}));
 
 
@@ -52,7 +53,7 @@ app.use(express.urlencoded({extended: true}));
 
     }catch(e){
       // console.log("nganu");
-      res.json({status: "failure", reason: e});
+      res.json({error: true, message: "User not created", reason: e.message});
     }
   })
 
@@ -181,7 +182,8 @@ app.use(express.urlencoded({extended: true}));
           message: "failed to retrieve question or question empty",
           reason: err
         });
-      }else{
+      }
+      else{
         const sql = "SELECT * FROM answer WHERE question_id = ?";
         connection.query(sql, data, function(err, answer) {
           if (err || answer == 0) {
@@ -235,18 +237,20 @@ app.patch("/test/:questionId/:userId/:answerId", async(req, res) =>{
       sid: req.body.sid,
       qid: req.params.questionId,
       uid: req.params.userId,
-      aid: req.params.answerId
+      aid: req.params.answerId,
+      indeks: req.body.indeks
   }
-  const sql = "INSERT INTO saved VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id_answer=?;";
-  connection.query(sql, [data.sid, data.uid, data.qid, data.aid, data.aid], function(err, userAnswer) {
+  const sql = "INSERT INTO saved VALUES (?, ?, ?, ?,?) ON DUPLICATE KEY UPDATE id_answer=?, indeks=?;";
+  connection.query(sql, [data.sid, data.uid, data.qid, data.aid, data.indeks, data.aid, data.indeks], function(err, userAnswer) {
     if (err) {
-      // console.log(sql);
+      console.log(sql);
       res.json({
         error : true,
         message: "failed to save user's answer",
         reason: err
       });
     }else{
+      console.log(sql);
       //send the freakin thing out
       res.json({
         error : false,
@@ -254,7 +258,6 @@ app.patch("/test/:questionId/:userId/:answerId", async(req, res) =>{
         data : data
       });
     }
-
   });
 });
 
@@ -289,18 +292,19 @@ app.get("/answered/:userId", async(req, res) =>{
     if (err || userAnswer == 0) {
       res.json({
         error: true,
-        message: "failed to retrieve user answer, user probably haven't answered or user doesn't exist",
+        message: "failed to retrieve user's answer, user probably haven't answered or user doesn't exist",
         answered : userAnswer
       });
     }else{
-      res.json({
-        error: false,
-        message: "success",
-        answered : userAnswer
-      });
-    }
+          res.json({
+            error: false,
+            message: "success",
+            answered : userAnswer
+          });
+        }
+    });
   });
-});
+
 
 //delete all saved answer according to the user id
 app.delete("/answered/clean/:userId", async(req, res) =>{
@@ -367,8 +371,10 @@ app.delete("/test/history/delete", async(req, res) =>{
 });
 
 
-app.get('/status', (req, res) => res.send('Working!'));
+app.get('/', (req, res) => res.send('Working!'));
 
 // Port 8080 for Google App Engine
-app.set('port', process.env.PORT || 3000);
-app.listen(3000);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log('Hello world listening on port', port);
+});
