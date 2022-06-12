@@ -100,7 +100,6 @@ In order to use the endpoint, you have to deploy the API using Cloud Run in Goog
 - Request Parameter
   - :userid as string
 
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.001.png)
 
 - Response
 
