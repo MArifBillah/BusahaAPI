@@ -3,12 +3,13 @@
 - General Information
 - Technologies
 - Contact
+- How To Deploy to GCP
 - Documentation
 
 ## General Info
 This is the API for our app BUSAHA which stands for "Buka dan Buat Usaha". This API is deployed using Google Cloud Platform's Cloud Run service and connected to the Cloud SQL database. This repository contains two branches:
 - Main, this branch is for development and testing purposes and only run on localhost with the provided local database. credentials.json not provided.
-- GCP, this branch is the one being deployed to the Cloud Run and listens to port 8080. creds.json not provided.
+- GCP, this branch is the one being deployed to the Cloud Run and listens to port 8080. cred.json not provided.
 
 ## Technologies
 - Node.js version : v16.14.0
@@ -20,15 +21,25 @@ For further information you can contact:
 - arifbillahbill@gmail.com (Muhammad Arif Billah)
 
 
+## How To Deploy
+In order to use the endpoint, you have to deploy the API using Cloud Run in Google Cloud Platform (Keep in mind that you will still need your own credential.json for this). Here's how :
+- Clone the project “GCP” branch from repo
+- Create Cloud SQL database (Cloud SQL for MySQL)
+- Set up the required environment variables (Check the database.js)
+- Build the container image using the provided Dockerfile
+- Deploy the container image to Cloud Run
+- Click the generated endpoint link to test the connection
+
+
 ## Documentation
 
 ## Check Connection
 **Endpoint :**\
-<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/status>
+<https://busaha-api-service-6fzh2i3qvq-et.a.run.app>
 
 
 - Url : 
-  - /status
+  - 
 - Method
   - GET
 - Request Body
@@ -83,7 +94,7 @@ For further information you can contact:
 <https://busaha-api-service-6fzh2i3qvq-et.a.run.app/user/:userid>
 
 - Url : 
-  - /app/:userid
+  - /user/:userid
 - Method
   - GET
 - Request Parameter
@@ -124,115 +135,9 @@ For further information you can contact:
 - Request Parameter
   - :questionId as int
 
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.002.png)
-
 - Response
 
 |<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "Success",</p><p>`    `"question": [</p><p>`        `{</p><p>`            `"id": 1,</p><p>`            `"question": "Berapa modal usaha yang berani anda siapkan?"</p><p>`        `}</p><p>`    `],</p><p>`    `"answer": [</p><p>`        `{</p><p>`            `"answer\_id": 1,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "1 juta",</p><p>`            `"indeks": 1000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 2,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "1 - 10 juta",</p><p>`            `"indeks": 10000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 3,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "10 - 25 juta",</p><p>`            `"indeks": 25000000</p><p>`        `},</p><p>`        `{</p><p>`            `"answer\_id": 4,</p><p>`            `"question\_id": 1,</p><p>`            `"answer": "Diatas 25 juta",</p><p>`            `"indeks": 100000000</p><p>`        `}</p><p>`    `]</p><p>}</p><p></p>|
-| :- |
-
-## Get a User's answer of a Specific Question
-**Endpoint :**\
-<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId>
-
-- Url :
-  - /test/:questionId/:userId
-- Method
-  - GET
-- Request Parameters
-  - :questionId as int
-  - :userId as string
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.003.png)
-
-- Response
-
-|<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"Answer": [</p><p>`        `{</p><p>`            `"id": 4,</p><p>`            `"id\_answer": 6</p><p>`        `}</p><p>`    `]</p><p>}</p>|
-| :- |
-
-
-## Save User Answers
-**Endpoint :**\
-[https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId/:answerId](https://busaha-api-service-6fzh2i3qvq-et.a.run.app/test/:questionId/:userId/:answerId)
-
-- Url :
-  - /test/:questionId/:userId/:answerId
-- Method
-  - PATCH
-- Request Body
-  - sid as int, only fill this if user’s answer already existed.
-  - Indeks as int
-- Request Parameters
-  - :questionId as int
-  - :userId as string
-  - :answerId as int
-- Response without sid (saved id)
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.004.png)
-
-|<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"data": {</p><p>`        `"qid": "3",</p><p>`        `"uid": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`        `"aid": "9",</p><p>`        `"indeks": "2"</p><p>`    `}</p><p>}</p><p></p>|
-| :- |
-- Response with sid (saved id)
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.005.png)
-
-|<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"data": {</p><p>`        `"sid": "5",</p><p>`        `"qid": "3",</p><p>`        `"uid": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`        `"aid": "8",</p><p>`        `"indeks": "1"</p><p>`    `}</p><p>}</p>|
-| :- |
-
-## Get Result
-**Endpoint :**\
-<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/usaha/:usahaId>
-
-- Url:
-  - /usaha/:usahaId
-- Method
-  - GET
-- Request Parameter
-  - :usahaId as int
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.006.png)
-
-- Response (Database masih kosong)
-
-|<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"result": []</p><p>}</p><p></p>|
-| :- |
-
-
-## Get All of User's Answer
-**Endpoint :**\
-<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/:userId>
-
-- Url :
-  - /answered/:userId
-- Method
-  - GET
-- Request Parameter
-  - :userId as string
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.007.png)
-
-- Response
-
-|<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"answered": [</p><p>`        `{</p><p>`            `"id": 1,</p><p>`            `"id\_user": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`            `"id\_question": 1,</p><p>`            `"id\_answer": 2,</p><p>`            `"indeks": 10000000</p><p>`        `},</p><p>`        `{</p><p>`            `"id": 4,</p><p>`            `"id\_user": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`            `"id\_question": 2,</p><p>`            `"id\_answer": 6,</p><p>`            `"indeks": 1</p><p>`        `},</p><p>`        `{</p><p>`            `"id": 5,</p><p>`            `"id\_user": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`            `"id\_question": 3,</p><p>`            `"id\_answer": 8,</p><p>`            `"indeks": 1</p><p>`        `}</p><p>`    `]</p><p>}</p>|
-| :- |
-
-
-## Delete All of User's Answer
-**Endpoint :**\
-<https://busaha-api-service-6fzh2i3qvq-et.a.run.app/answered/clean/:userId>
-
-- Url:
-  - /answered/clean/:userId
-- Method
-  - DELETE
-- Request Parameters
-  - :userId as string
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.008.png)
-
-- Response
-
-|<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "Data successfully Deleted",</p><p>`    `"DataDeleted": 3,</p><p>`    `"userID": "RIBokWhumqPLqkVyI4RmbYCIXAZ2"</p><p>}</p>|
 | :- |
 
 
@@ -249,8 +154,6 @@ For further information you can contact:
   - result as string
   - description as string
   - percentage as int 
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.009.png)
 
 - Response
 
@@ -270,8 +173,6 @@ For further information you can contact:
 - Request Parameter
   - :userId as string
 
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.010.png)
-
 - Response
 
 |<p>{</p><p>`    `"error": **false**,</p><p>`    `"message": "success",</p><p>`    `"data": [</p><p>`        `{</p><p>`            `"id": 1,</p><p>`            `"id\_user": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`            `"result": "Pedagang",</p><p>`            `"description": "Pedagang adalah orang yang berdagang",</p><p>`            `"percentage": 70,</p><p>`            `"time": "2022-05-28T11:59:16.000Z"</p><p>`        `},</p><p>`        `{</p><p>`            `"id": 2,</p><p>`            `"id\_user": "RIBokWhumqPLqkVyI4RmbYCIXAZ2",</p><p>`            `"result": "Pedagang",</p><p>`            `"description": "Pedagang adalah orang yang berdagang",</p><p>`            `"percentage": 70,</p><p>`            `"time": "2022-05-30T15:47:07.000Z"</p><p>`        `}</p><p>`    `]</p><p>}</p><p></p>|
@@ -289,8 +190,6 @@ For further information you can contact:
   - DELETE
 - Request Body
   - id as int
-
-![](Aspose.Words.40bd0da8-19cf-4c31-a61c-39bcd8da868b.011.png)
 
 - Response
 
